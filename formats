@@ -1,0 +1,81 @@
+variable "<VARIABLE_NAME>" {
+  description = "Description of the variable"  # Optional
+  type        = <TYPE>                        # Optional (string, number, list, map, etc.)
+  default     = <DEFAULT_VALUE>               # Optional default value
+}
+
+resource "<PROVIDER_RESOURCE_TYPE>" "<RESOURCE_NAME>" {
+  # Configuration options
+}
+
+output "<OUTPUT_NAME>" {
+  value       = <EXPRESSION>   # The value to output
+  description = "Description of the output"  # Optional
+}
+
+provider "<PROVIDER_NAME>" {
+  # Configuration options (like credentials, regions, etc.)
+}
+
+
+provider "<PROVIDER_NAME>" {
+  <ATTRIBUTE_NAME> = <VALUE>
+}
+
+
+variable "<VARIABLE_NAME>" {
+  description = "Description of the variable"  # Optional
+  type        = <TYPE>                        # Optional
+  default     = <DEFAULT_VALUE>               # Optional
+}
+
+
+resource "<PROVIDER_RESOURCE_TYPE>" "<NAME>" {
+  <ARGUMENT_NAME> = <VALUE>
+}
+
+
+output "<OUTPUT_NAME>" {
+  value       = <EXPRESSION>   # Required, the value to output
+  description = "Description"  # Optional
+}
+
+
+resource "<PROVIDER_RESOURCE_TYPE>" "<NAME>" {
+  <ARGUMENT_NAME_1> = <VALUE>
+  <ARGUMENT_NAME_2> = <VALUE>
+  ...
+}
+
+###########################################example
+
+# Variables
+variable "region" {
+  description = "AWS region for deployment"
+  default     = "us-east-1"
+}
+
+variable "instance_type" {
+  description = "Type of EC2 instance"
+  default     = "t2.micro"
+}
+
+# Provider
+provider "aws" {
+  region = var.region  # Passing variable as an attribute
+}
+
+# Resource
+resource "aws_instance" "example_instance" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = var.instance_type  # Using variable
+  tags = {
+    Name = "ExampleInstance"
+  }
+}
+
+# Output
+output "instance_id" {
+  value       = aws_instance.example_instance.id
+  description = "The ID of the EC2 instance"
+}
