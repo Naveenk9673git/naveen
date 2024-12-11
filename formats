@@ -47,6 +47,13 @@ resource "<PROVIDER_RESOURCE_TYPE>" "<NAME>" {
   ...
 }
 
+
+data "<PROVIDER_RESOURCE_TYPE>" "<NAME>" {
+  # Arguments to query the resource
+}
+
+
+
 ###########################################example
 
 # Variables
